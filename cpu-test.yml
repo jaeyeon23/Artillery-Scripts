@@ -1,8 +1,8 @@
 config:
-  target: "http://localhost/"
+  target: "http://localhost"
   phases:
-    - duration: 60        # 초
-      arrivalRate: 4      # 매 초 생성할 사용자 수
+    - duration: 360        # 초
+      arrivalRate: 2      # 매 초 생성할 사용자 수
       name: Warm up
 scenarios:
   # We define one scenario:
