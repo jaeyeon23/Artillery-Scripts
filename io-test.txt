@@ -1,0 +1,44 @@
+# io-test.yaml 파일 (초기 형태)
+config:
+  target: "http://{nginx-ip}"
+  phases:
+    - duration: 333
+      arravalRate: 3
+      name: Warm up
+  payload:
+    path: "ratings_test_1k.csv"
+    fields:
+      - "content"
+scenarios:
+  - name: "just post content"
+    flow:
+      - post:
+          url: "/post"
+          json:
+            content:  "{{ content }}"
+
+# io-test.yaml 파일 (7분 12초 고도화된 형태)
+config:
+  target: "http://{nginx-ip}"
+  phases:
+    - duration: 60
+      arrivalRate: 3
+      name: Warm up
+    - duration: 120
+      arrivalRate: 3
+      rampTo: 100
+      name: Ramp up load
+    - duration: 600
+      arrivalRate: 100
+      name: Sustained load
+  payload:
+    path: "ratings_test_10k.csv"
+    fields:
+      - "content"
+scenarios:
+  - name: "just post content"
+    flow:
+      - post:
+          url: "/post"
+          json:
+            content:  "{{ content }}"
